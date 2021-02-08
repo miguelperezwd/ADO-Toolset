@@ -18,6 +18,8 @@ function Get-ADOProjects {
         $PersonalAccessToken
     .EXAMPLE
         Get-ADOProjects -Organization YourOrg -PersonalAccessToken xxxxxxxxxx
+    .INPUTS
+        String
     .OUTPUTS
         System.Object[]
     #>
