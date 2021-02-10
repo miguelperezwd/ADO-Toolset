@@ -9,7 +9,7 @@
 
 # 0. Import the module
 Write-Verbose "Importing AzureDevOpsToolset Module..." -Verbose
-Import-Module "./AzureDevOpsToolset.psm1"
+Import-Module "./Module/AzureDevOpsToolset.psm1"
 
 # 1. Define common use variables
 $Organization         = "" # Organization name
