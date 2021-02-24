@@ -15,4 +15,4 @@ Import-Module "./Module/AzureDevOpsToolset.psm1"
 $Organization         = "" # Organization name
 $PersonalAccessToken  = "" # User's Personal Access Token
 
-Get-ADOProjects -Organization $Organization -PersonalAccessToken $PersonalAccessToken
+Get-AllADOProjects -Organization $Organization -PersonalAccessToken $PersonalAccessToken
