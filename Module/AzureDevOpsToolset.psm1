@@ -7,7 +7,7 @@
 
 #=======================================================================================
 
-function Get-ADOProjects {
+function Get-AllADOProjects {
     <#
     .SYNOPSYS
         Get all Azure DevOps projects in the specified organization
@@ -35,18 +35,17 @@ function Get-ADOProjects {
     
     begin {
         # Set the token headers for the API request
-        Write-Verbose "Setting the token headers for the API request..." -Verbose
         $token = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes(":$($PersonalAccessToken)"))
         $headers = @{authorization = "Basic $token"}
     }
     
     process {
-        # Connect to Azure DevOps and get all the projects from the given Organization
-        Write-Verbose "Connecting to Azure DevOps..." -Verbose
-        $URI = "https://dev.azure.com/$Organization/_apis/projects?api-version=6.0&`$top=500" # The default API will only bring the first 100 projects, adding the $top variable lets you retrieve more projects
         
+        $URI = "https://dev.azure.com/$Organization/_apis/projects?api-version=6.0&`$top=500" # The default API will only bring the first 100 projects, adding the $top variable lets you retrieve more projects
+
         try {
-            Write-Verbose "Retrieving list of Azure DevOps Projects..." -Verbose
+            # Connect to Azure DevOps and get all the projects from the given Organization
+            Write-Verbose "Connecting to Azure DevOps and retrieving list of projects..." -Verbose
             $ADOProjects = (Invoke-RestMethod -Uri $URI -Method GET -ContentType "application/json" -Headers $headers).value
             return $ADOProjects # The API result is stored here, use this variable for getting projects information and properties.
         }
