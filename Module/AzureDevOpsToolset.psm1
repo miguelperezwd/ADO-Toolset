@@ -25,10 +25,9 @@ function Get-AllADOProjects {
     #>
     [CmdletBinding()]
     param (
-        # Name of the organization
         [Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()]
         [string] $Organization,
-        # User's Personal Access Token
+
         [Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()]
         [string] $PersonalAccessToken
     )
@@ -40,14 +39,15 @@ function Get-AllADOProjects {
     }
     
     process {
-        
-        $URI = "https://dev.azure.com/$Organization/_apis/projects?api-version=6.0&`$top=500" # The default API will only bring the first 100 projects, adding the $top variable lets you retrieve more projects
 
         try {
-            # Connect to Azure DevOps and get all the projects from the given Organization
-            Write-Verbose "Connecting to Azure DevOps and retrieving list of projects..." -Verbose
+   
+            Write-Verbose "Connecting to the Organization and retrieving list of projects..." -Verbose
+
+            $URI = "https://dev.azure.com/$Organization/_apis/projects?api-version=6.0&`$top=500" # The default API will only bring the first 100 projects, adding the $top variable lets you retrieve more projects
             $ADOProjects = (Invoke-RestMethod -Uri $URI -Method GET -ContentType "application/json" -Headers $headers).value
-            return $ADOProjects # The API result is stored here, use this variable for getting projects information and properties.
+            return $ADOProjects # The API result is returned here, use this variable for getting projects information and properties.
+        
         }
         catch {
             Write-Error "Something wrong happened during the API request, please review the parameters and make sure the information is correct." -ErrorAction Stop
@@ -56,7 +56,7 @@ function Get-AllADOProjects {
     }   
     
     end {
-        Write-Verbose "All projects have been retrieved." -Verbose
+        Write-Verbose "All projects have been retrieved from the Organization succesfully." -Verbose
     }
 }
 
