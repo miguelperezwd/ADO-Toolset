@@ -9,10 +9,15 @@
 
 # 0. Import the module
 Write-Verbose "Importing AzureDevOpsToolset Module..." -Verbose
-Import-Module "./Module/AzureDevOpsToolset.psm1"
+Import-Module "./Module/AzureDevOpsToolset.psm1" -Force
 
 # 1. Define common use variables
 $Organization         = "" # Organization name
 $PersonalAccessToken  = "" # User's Personal Access Token
 
-Get-AllADOProjects -Organization $Organization -PersonalAccessToken $PersonalAccessToken
+# 2. Execute the functions, just uncomment the line you want to test/execute
+
+# Get-AllADOProjects -Organization $Organization -PersonalAccessToken $PersonalAccessToken
+
+# Create-ADOProject -Organization $Organization -Project "PartsUnlimited" -Visibility "Private" -Process "Agile" -VersionControl "Git" -Description "My new project" -PersonalAccessToken $PersonalAccessToken
+
